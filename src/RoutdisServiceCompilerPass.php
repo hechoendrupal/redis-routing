@@ -1,7 +1,7 @@
 <?php
 /**
- * File content
- * Drupal\routdis\Routdis\ServiceCompilerPass.
+ * @file
+ * Content Drupal\routdis\Routdis\ServiceCompilerPass.
  */
 namespace Drupal\routdis;
 

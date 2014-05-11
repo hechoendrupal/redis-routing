@@ -1,7 +1,7 @@
 <?php
 /**
- * File content
- * Drupal\routdis\RoutdisServiceProvider.
+ * @file
+ * Content Drupal\routdis\RoutdisServiceProvider.
  */
 namespace Drupal\routdis;
 
@@ -10,7 +10,6 @@ use Drupal\Core\DependencyInjection\ServiceProviderInterface;
 
 class RoutdisServiceProvider implements ServiceProviderInterface 
 {
-
   /**
    * {@inheritdoc}
    */
