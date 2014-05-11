@@ -42,7 +42,6 @@ class LazyLoadingRouteCollection extends BaseLazyLoading implements Iterator
     	$result[] = $this->redis->hmget('router:'.$name,['name','route']);
     }
 
-    var_dump(count($result) );
     $routes = [];
     foreach ($result as $route) {
     	$name = $route[0];
