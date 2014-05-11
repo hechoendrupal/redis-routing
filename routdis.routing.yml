@@ -1,8 +1,0 @@
-
-routdis_hello:
-  path: '/routdis/hello'
-  defaults:
-    _content: '\Drupal\routdis\Controller\DefaultController::hello'
-    _title: 'routdis Title'
-  requirements:
-    _permission: 'access content'
