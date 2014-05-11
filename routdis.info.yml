@@ -1,8 +1,6 @@
-name: Routdis
+name: Redis for Routing
 type: module
-description: 'Storage your routing system in redis'
+description: 'Stores the routing system in Redis'
 package: Routing
-version: 0.1
+version: 0.5
 core: 8.x
-dependencies:
-  - composer_manager
