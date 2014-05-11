@@ -11,7 +11,7 @@ load the predis librarie before to load Drupal bootstrap.
 ### Instalation
 ```bash 
 $ cd /path/to/drupal/8
-$ composer requiere "predis/predis":"dev-master"
+$ composer require "predis/predis":"dev-master"
 $ cd modules
 $ git clone git@github.com:dmouse/redis-menu.git routdis
 $ drush en -y routdis
