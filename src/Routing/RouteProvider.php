@@ -6,17 +6,13 @@
  */
 namespace Drupal\routdis\Routing;
 
-use Drupal\Component\Utility\String;
 use Drupal\Core\State\StateInterface;
 use Drupal\Core\Routing\RouteProviderInterface;
 use Drupal\Core\Routing\RouteBuilderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
-use Drupal\routdis\Database\Redis;
 use Drupal\Core\Routing\RouteProvider as BaseRouteProvider;
+use Drupal\routdis\Database\Redis;
 
 /**
  * A Route Provider front-end for all Drupal-stored routes.
