@@ -36,7 +36,7 @@ class RoutdisServiceCompilerPass implements CompilerPassInterface
       new Reference('state')
     ]);
     $provider->setTags([
-      'name' => 'event_subscriber'
+      ['name' => ['event_subscriber']]
     ]);
   }
 }
