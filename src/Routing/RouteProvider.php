@@ -157,7 +157,7 @@ class RouteProvider extends BaseRouteProvider implements RouteProviderInterface,
    * {@inheritdoc}
    */
   public function getAllRoutes() {
-    return new LazyLoadingRouteCollection($this->connection, $this->tableName);
+    return new LazyLoadingRouteCollection($this->redis, $this->routes);
   }
 
 }
