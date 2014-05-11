@@ -7,14 +7,12 @@
 namespace Drupal\routdis\Routing;
 
 use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Drupal\Core\Routing\MatcherDumperInterface;
 use Drupal\Core\State\State;
+use Drupal\Core\Routing\MatcherDumper as BaseMatcherDumper;
 use Drupal\routdis\Database\Redis;
 
-class MatcherDumper implements MatcherDumperInterface
+class MatcherDumper extends BaseMatcherDumper implements MatcherDumperInterface
 {
 
 	protected $redis;
@@ -30,25 +28,11 @@ class MatcherDumper implements MatcherDumperInterface
 		$this->tableName = $table;
 	}
 
-	public function addRoutes(RouteCollection $routes)
-	{
-		if (empty($this->routes)) {
-    	$this->routes = $routes;
-    }
-    else {
-      $this->routes->addCollection($routes);
-    }
-	}
-
 	public function dump(array $options = array())
 	{
 		$masks = array_flip($this->state->get('routing.menu_masks.'.$this->tableName, []));
 		try {
-			// Json Serialization
-			$normalizer = new GetSetMethodNormalizer();
-      $encoder = new JsonEncoder();
-      $serializer = new Serializer(array($normalizer), array($encoder));
-
+			
       // Get routes in chunks
       $this->redis->del('router:patterns');
 			$route_chunks = array_chunk($this->routes->all(), 500, TRUE);
@@ -79,10 +63,5 @@ class MatcherDumper implements MatcherDumperInterface
     $this->state->set('routing.menu_masks.' . $this->tableName, $masks);
     $this->routes = NULL;
 	}
-
-	public function getRoutes()
-	{
-		return $this->routes;
-	}
-
+	
 }
