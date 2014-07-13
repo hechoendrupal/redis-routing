@@ -1,8 +1,5 @@
 {
-    "name": "dmouse/routdis",
-    "require": {
-        "predis/predis": "dev-master"
-    },
+    "name": "dmouse/redis-routing",
     "authors": [
         {
             "name": "David Flores",
