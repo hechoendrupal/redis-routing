@@ -14,34 +14,34 @@ class LazyLoadingRouteCollection extends BaseLazyLoading implements \Iterator
   /**
    * Creates a LazyLoadingRouteCollection instance.
    *
-   * @param \Drupal\Core\Database\Connection $database
-   *   The database connection.
-   * @param string $table
-   *   (optional) The table to retrieve the route information.
+   * @param \Predis\Client $redis
+   *   The redis connection.
+   * @param string $prefix
+   *   (optional) The prefix for redis routing storage.
    */
-  public function __construct(Client $redis, $routes) {
+  public function __construct(Client $redis, $prefix='router')
+  {
     $this->redis = $redis;
-    $this->routes = $routes;
+    $this->prefix = $prefix;
+    $this->routes = $this->redis->hgetall('router:patterns');
   }
 
-	/**
-   * Loads the next routes into the elements array.
-   *
-   * @param int $offset
-   *   The offset used in the db query.
+  /**
+   * {@inheritdoc}
    */
-  public function loadNextElements($offset) {
+  public function loadNextElements($offset)
+  {
     $this->elements = [];
-    $route_names = array_keys($this->routes);
+    $route_names = array_slice(array_values($this->routes), $offset, 50);
 
     $result = [];
     foreach ($route_names as $name) {
-    	$result[] = $this->redis->hmget('router:'.$name,['name','route']);
+      $result[] = $this->redis->hmget('router:'.$name,['name','route']);
     }
 
     $routes = [];
     foreach ($result as $route) {
-    	$name = $route[0];
+      $name = $route[0];
       $routes[$name] = unserialize($route[1]);
     }
 
@@ -51,9 +51,10 @@ class LazyLoadingRouteCollection extends BaseLazyLoading implements \Iterator
   /**
    * {@inheritdoc}
    */
-  public function count() {
+  public function count()
+  {
     if (!isset($this->count)) {
-      $this->count = (int) count($this->elements);
+      $this->count = (int) count($this->routes);
     }
     return $this->count;
   }
