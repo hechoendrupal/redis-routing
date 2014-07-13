@@ -1,7 +1,0 @@
-parameters:
-  routdis.default:
-    - { scheme: "tcp", port: 6379, host: "127.0.0.1", database: 0 } 
-services:
-  routdis.redis:
-    class: Drupal\routdis\Database\Redis
-    arguments: ["%routdis.default%"]
