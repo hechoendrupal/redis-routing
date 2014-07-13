@@ -1,10 +1,9 @@
 <?php
-
 /**
  * @file
- * Contains Drupal\routdis\Routing\RouteProvider.
+ * Contains Drupal\redis_routing\Routing\RouteProvider.
  */
-namespace Drupal\routdis\Routing;
+namespace Drupal\redis_routing\Routing;
 
 use Drupal\Core\State\StateInterface;
 use Drupal\Core\Routing\RouteProviderInterface;

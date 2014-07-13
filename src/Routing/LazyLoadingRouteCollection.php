@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Content Drupal\routdis\Routing\LazyLoadingRouteCollection.
+ * Contains Drupal\redis_routing\Routing\LazyLoadingRouteCollection.
  */
 
-namespace Drupal\routdis\Routing;
+namespace Drupal\redis_routing\Routing;
 
 use Drupal\Core\Routing\LazyLoadingRouteCollection as BaseLazyLoading;
 use Predis\Client;

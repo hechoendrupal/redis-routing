@@ -2,9 +2,9 @@
 
 /**
  * @file
- * Contains Drupal\routdis\Routing\MatcherDumper
+ * Contains Drupal\redis_routing\Routing\MatcherDumper
  */
-namespace Drupal\routdis\Routing;
+namespace Drupal\redis_routing\Routing;
 
 use Symfony\Component\Routing\RouteCollection;
 use Drupal\Core\Routing\MatcherDumperInterface;
