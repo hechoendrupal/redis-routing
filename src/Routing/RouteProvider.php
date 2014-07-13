@@ -16,10 +16,12 @@ use Drupal\routdis\Database\Redis;
 /**
  * A Route Provider front-end for all Drupal-stored routes.
  */
-class RouteProvider extends BaseRouteProvider implements RouteProviderInterface, EventSubscriberInterface 
+class RouteProvider extends BaseRouteProvider implements RouteProviderInterface, EventSubscriberInterface
 {
 
-  
+  /**
+   * @var \Drupal\predis\RedisConnectionInterface
+   */
   protected $redis;
 
   /**

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Contains Drupal\redis_routing\Routing\LazyLoadingRouteCollection.
@@ -9,12 +8,10 @@ namespace Drupal\redis_routing\Routing;
 
 use Drupal\Core\Routing\LazyLoadingRouteCollection as BaseLazyLoading;
 use Predis\Client;
-use Iterator;
 
-class LazyLoadingRouteCollection extends BaseLazyLoading implements Iterator
+class LazyLoadingRouteCollection extends BaseLazyLoading implements \Iterator
 {
-
-	/**
+  /**
    * Creates a LazyLoadingRouteCollection instance.
    *
    * @param \Drupal\Core\Database\Connection $database
@@ -47,7 +44,7 @@ class LazyLoadingRouteCollection extends BaseLazyLoading implements Iterator
     	$name = $route[0];
       $routes[$name] = unserialize($route[1]);
     }
-    
+
     $this->elements = $routes;
   }
 
@@ -60,5 +57,4 @@ class LazyLoadingRouteCollection extends BaseLazyLoading implements Iterator
     }
     return $this->count;
   }
-
 }

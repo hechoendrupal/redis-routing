@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Contains Drupal\redis_routing\Routing\MatcherDumper
@@ -43,17 +42,17 @@ class MatcherDumper extends BaseMatcherDumper implements MatcherDumperInterface
 					$compiled = $route->compile();
 					$masks[$compiled->getFit()] = 1;
 
-					$this->redis->del('router:'.$name);
-	        $this->redis->hset('router:'.$name, "name", $name);
-	        $this->redis->hset('router:'.$name, "fit", $compiled->getFit());
-	        $this->redis->hset('router:'.$name, "path", $compiled->getPath());
-	        $this->redis->hset('router:'.$name, "pattern_outline", $compiled->getPatternOutline());
-	        $this->redis->hset('router:'.$name, "number_parts", $compiled->getNumParts());
-	        $this->redis->hset('router:'.$name, "route", serialize($route) );
-	        $this->redis->hset('router:patterns', $compiled->getPatternOutline(), $name);
-				}
-			}
-		} catch (\Exception $e) {
+          $this->redis->del('router:'.$name);
+          $this->redis->hset('router:'.$name, "name", $name);
+          $this->redis->hset('router:'.$name, "fit", $compiled->getFit());
+          $this->redis->hset('router:'.$name, "path", $compiled->getPath());
+          $this->redis->hset('router:'.$name, "pattern_outline", $compiled->getPatternOutline());
+          $this->redis->hset('router:'.$name, "number_parts", $compiled->getNumParts());
+          $this->redis->hset('router:'.$name, "route", serialize($route) );
+          $this->redis->hset('router:patterns', $compiled->getPatternOutline(), $name);
+        }
+      }
+    } catch (\Exception $e) {
       watchdog_exception('Routing', $e);
       throw $e;
     }
@@ -62,6 +61,5 @@ class MatcherDumper extends BaseMatcherDumper implements MatcherDumperInterface
     rsort($masks);
     $this->state->set('routing.menu_masks.' . $this->tableName, $masks);
     $this->routes = NULL;
-	}
-	
+  }
 }
