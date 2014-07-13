@@ -1,15 +1,15 @@
 <?php
 /**
  * @file
- * Content Drupal\routdis\Routdis\ServiceCompilerPass.
+ * Contains Drupal\redis_routing\ServiceCompilerPass.
  */
-namespace Drupal\routdis;
+namespace Drupal\redis_routing;
 
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
-class RoutdisServiceCompilerPass implements CompilerPassInterface
+class RedisRoutingServiceCompilerPass implements CompilerPassInterface
 {
   /**
    * Change services in @service_container
@@ -21,22 +21,22 @@ class RoutdisServiceCompilerPass implements CompilerPassInterface
   {
     // replace router dumper
     $dumper = $container->getDefinition('router.dumper');
-    $dumper->setClass('Drupal\routdis\Routing\MatcherDumper');
+    $dumper->setClass('Drupal\redis_routing\Routing\MatcherDumper');
     $dumper->setArguments([
-      new Reference('routdis.redis'),
-      new Reference('state')
+      new Reference('predis.connnection'),
+      new Reference('state'),
     ]);
 
     // replace route provider
     $provider = $container->getDefinition('router.route_provider');
-    $provider->setClass('Drupal\routdis\Routing\RouteProvider');
+    $provider->setClass('Drupal\redis_routing\Routing\RouteProvider');
     $provider->setArguments([
-      new Reference('routdis.redis'),
+      new Reference('predis.connnection'),
       new Reference('router.builder'),
-      new Reference('state')
+      new Reference('state'),
     ]);
     $provider->setTags([
-      ['name' => ['event_subscriber']]
+      ['name' => ['event_subscriber']],
     ]);
   }
 }
